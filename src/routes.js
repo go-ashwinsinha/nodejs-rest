@@ -2,6 +2,8 @@ const Validator = require('express-json-validator-middleware').Validator
 const router = require('express').Router()
 const { authController } = require('./middleware/auth')
 const { validateAuthToken } = require('./services/validateToken')
+const { addUserDbHelper } = require('./services/addUserDbHelper')
+
 
 const { name, version } = require('../package.json')
 
@@ -31,34 +33,37 @@ const { validate } = new Validator();
 
 //create slice
 router.post(
-    '/addUser', validate({ body: }),
-	validate({ body: jasperSliceActivateSchema }),
+    '/addUser/', validate({ body: addUserSchema}),
     validateAuthToken,
-    sliceActivationParamMapping
-	
-
+    addUserDbHelper
+    )
 
 var jasperSliceActivateSchema = JSON.parse(fs.readFileSync('jasperSliceActivateSchema.json', 'utf8'));
 
-//activate slice
+//update user
 router.post(
-    '/service/updateServiceOrder/v1/', validate({ body: jasperSliceActivateSchema }),
-    validateAuthToken,
-    sliceActivationParamMapping
+    '/updateUser/{userId}', validate({ body: updateUserSchema }),
+    validateAuthToken
 )
 
 
-//graceful polling -------> THIS IS UNDER DEVELOPMENT, PLEASE DONT HIT THIS ENDPOINT
+//delete user
 router.post(
-    '/service/getSliceOrderStatus/v1/', validate({ body: jasperSliceActivateSchema }),
- //   validateAuthToken,
-   // sliceActivationParamMapping
+    '/deleteUser/{userId}', validate({ body: deleteUserSchema }),
+    validateAuthToken
 )
 
+//get user
+router.get(
+    '/getUser/{userId}',
+    validateAuthToken
+)
 
-//delete to be decided on its process.... 
-
-
+//list all users
+router.get(
+    '/getUsers/',
+    validateAuthToken
+)
 
 module.exports = router
 

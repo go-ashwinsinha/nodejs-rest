@@ -1,0 +1,51 @@
+{
+  "name": "nodejs-rest",
+  "version": "0.0.1",
+  "description": "This is rest api for load testing",
+  "main": "index.js",
+  "engines": {
+    "node": ">=14"
+  },
+  "scripts": {
+    "start:prod": "NODE_ENV=production node src/index.js",
+    "start:dev": "NODE_ENV=development NODE_PORT=3000 node src/index.js",
+    "nodemon": "NODE_ENV=development NODE_PORT=3000 nodemon src/index.js --delay 3",
+    "test": "jest --verbose  --coverage",
+    "watch": "jest --verbose  --coverage --watch",
+    "lint": "telus-standard --verbose",
+    "lint:fix": "telus-standard --verbose --fix",
+    "prepare": "husky install",
+    "generate-docs": "jsdoc -c jsdoc.json",
+    "format": "prettier '(src|test)/**/**.+(js|jsx|json|yml|yaml|md|mdx)' --write"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/go-ashwinsinha/nodejs-rest.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/go-ashwinsinha/nodejs-rest/issues"
+  },
+  "homepage": "https://github.com/go-ashwinsinha/nodejs-rest",
+  "dependencies": {
+    "aws-sdk": "^2.1053.0",
+    "axios": "^0.25.0",
+    "body-parser": "^1.19.1",
+    "compression": "^1.7.4",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "express-winston": "^4.2.0",
+    "helmet": "^5.0.2",
+    "node-cache": "^5.1.2",
+    "node-fetch": "^3.2.0",
+    "winston": "^3.5.0",
+    "jsonwebtoken": "^8.5.1",
+    "express-json-validator-middleware": "^2.2.1"
+  },
+  "devDependencies": {
+    "@telus/prettier-config": "^3.0.5",
+    "@telus/telus-standard": "^3.0.6",
+    "husky": "^7.0.0"
+  }
+}
